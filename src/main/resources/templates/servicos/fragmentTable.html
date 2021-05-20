@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<th:block th:fragment="tabelaPagamentos" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <div class="projects">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table width="100%">
+                        <tbody>
+                            <tr class="customer" id="lista" th:each="emolumento : ${emolumentos}">
+                                <td style="color: #023B5E; font-weight: 600;" th:text="${emolumento.mesReferente}"></td>
+                                <td style="color: #9C0B3C;" th:text="${emolumento.dataPagamento}"></td>
+                                <td style="color: #0BC04D;" th:text="${emolumento.situacao}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+

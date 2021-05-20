@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+    <head >
+        <title>ISPI Payment</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
+        <link rel="stylesheet" th:href="@{/css/formularios.css}" href="/css/formularios.css"/>
+        <link rel="stylesheet" th:href="@{/css/dashboard.css}" href="/css/dashboard.css" />
+
+    </head>
+
+    <body>
+        <div th:replace="fragmentos/menuPrincipal :: menuPrincipal"></div> 
+        <div class="container">
+            <div class="title">Lista de Estudantes</div>
+            <div class="button-link" sec:authorize-url="/cadastroAlunos">
+                <a href="/cadastroAlunos" >Novo Registo</a>
+            </div>
+            <!--MESSAGENS-->
+            <th:block th:include="fragmentos/MessagensDeAlertas"></th:block>
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Data de Nascimento</th>
+                        <th>E-mail</th>
+                        <th>Situação</th>
+                        <th>Opções</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="aluno : ${listaAlunos}">
+                        <td th:text="${aluno.nome} +' ' + ${aluno.sobrenome}"></td>
+                        <td th:text="${aluno.dataNascimento}"></td>
+                        <td th:text="${aluno.email}"></td>
+                        <td th:text="${aluno.situacao}"></td>
+                        <td>
+                            <a class="btn" th:href="@{/editarAluno/}+${aluno.codigo}">
+                                <i class="fas fa-edit"></i>Editar</a>
+                            <a  class="btn" th:href="@{/eliminarAluno/(codigo=${aluno.codigo})}" id="deleteButton">
+                                <i class="fas fa-times"></i>Eliminar</a>
+                        </td>
+
+                    </tr> 
+                    <tr th:if="${#lists.isEmpty(listaAlunos)}">
+                        <td colspan="7">Nenhum valor por apresentar</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="pagination">
+                <div>
+                    <span>Total de Registo: [[${totalDeItens}]] - Pagina [[${paginaCorrente}]] de [[${totalDePaginas}]]</span>
+                </div>
+                <ul>
+                    <a th:if="${paginaCorrente > 1}" th:href="@{/listarAlunos/1}">First</a>
+                    <a th:unless="${paginaCorrente > 1}">First</a>
+                    <li class="btnPaginatio prev">
+                        <a th:if="${paginaCorrente > 1}" th:href="@{'/listarAlunos/' + ${paginaCorrente - 1}}"><i class="fas fa-angle-left">Prev</i></a>
+                        <a th:unless="${paginaCorrente > 1}">Prev</a>
+                    </li>
+                    <th:block th:each="i: ${#numbers.sequence(1, totalDePaginas)}">                  
+                        <li class="numb">
+                            <a th:if="${i != paginaCorrente}" th:href="@{'/listarAlunos/' + ${i}}">[[${i}]]</a>  
+                            <span class="active" th:unless="${i != paginaCorrente}">[[${i}]]</span>  
+                        </li>
+                    </th:block>
+                    <li class="btnPaginatio next">
+                        <a th:if="${paginaCorrente < totalDePaginas}" th:href="@{'/listarAlunos/' + ${paginaCorrente + 1}}"><i class="fas fa-angle-right">Next</i></a>
+                        <a th:unless="${paginaCorrente < totalDePaginas}">Next</a>
+                    </li>
+                    <a th:if="${paginaCorrente < totalDePaginas}" th:href="@{'/listarAlunos/' + ${totalDePaginas}}">Last</a>
+                    <a th:unless="${paginaCorrente < totalDePaginas}">Last</a>
+                </ul>
+            </div>
+        </div>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/vendors.min.js"></script>
+        <script type="text/javascript" src="js/main.js" th:src="@{js/main.js}"></script>
+    </body>
+
+</html>

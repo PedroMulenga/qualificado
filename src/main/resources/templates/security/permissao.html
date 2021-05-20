@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Usuarios</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="css/bootstrap-switch.min.css" th:href="@{css/bootstrap-switch.min.css}"/>
+    </head>
+    <body>
+        <div class="container">
+            <h2 style="text-align: center;">Cadastro de Permissões</h2>
+            <!--MESSAGENS-->
+            <div class="alert alert-success alert-dismissible" id="success" th:if="${success != null}" role="alert">
+                <label th:text="${success}"></label>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span  aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="alert alert-danger alert-dismissible" id="error"  th:if="${error != null}" role="alert">
+                <label th:text="${error}"></label>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="alert alert-warning alert-dismissible" th:if="${warning != null}" role="alert">
+                <label th:text="${warning}"></label>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="alert alert-info alert-dismissible" th:if="${info != null}" role="alert">
+                <label th:text="${info}"></label>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST" th:object="${permissao}" autocomplete="off" th:action="@{/cadastrarPermissao}">
+                <div class="container">
+                    <div class="form-row">                   
+                        <div class="form-group col-md-4">
+
+                            <label for="nome">Nome da Permissão:</label>
+                            <select id="nome" class="form-control"  th:field="*{nome}">
+                                <option value="">Selecione o nome da Permissão</option>
+                                <option th:each="listaPermissao : ${T(com.ispi.projectoIspi.Enum.ListaPermissoes).values()}"
+                                        th:value="${listaPermissao}" th:text="${listaPermissao}"></option>
+                            </select>
+                            <span class="form-text text-danger" th:if="${#fields.hasErrors('nome')}" 
+                                  th:errors="*{nome}">
+                            </span>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label>
+                                    Estado
+                                </label>
+                                <input class="js-status" th:field="*{estado}" type="checkbox" data-off-color="danger" data-on-color="success"
+                                       data-on-text="Activo" data-off-text="Inactivo">                                   
+
+                            </div>
+                        </div>
+                    </div>                   
+                    <div class="modal-footer">
+
+                        <button type="submit" class="btn btn-outline-success">Salvar</button>
+                        <button type="button"  class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </form>
+            <div class="container">
+                <table class="table table-bordered table-hover">
+                    <thead class="thead-dark">
+                    <th scope="col">Nome </th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Acção</th>
+                    </thead>
+                    <tbody>
+                        <tr scope="row" th:each="perm : ${listaPermissoes}">
+                            <td th:text="${perm.nome}"></td>
+                            <td th:text="${perm.estadoFormato}"></td>
+
+                            <td>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+            <script src="js/jquery.min.js"></script>
+            <script src="js/bootstrap.bundle.min.js"></script>
+            <script src="js/bootstrap-switch.min.js" th:src="@{js/bootstrap-switch.min.js}" ></script>
+            <script>
+                $('.js-status').bootstrapSwitch();
+            </script>
+        </div>
+    </body>
+</html>

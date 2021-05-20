@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>ISPI Payment</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" th:href="@{css/style.css}"/>
+        <script th:src="@{https://kit.fontawesome.com/64d58efce2.js}" crossorigin="anonymous"></script>
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="forms-container">              
+                <div class="signin-signup">
+                    <form th:action="@{/login}" method="POST"class="sign-in-form">
+                        <div class="" style="color: #d43f3a; font-size: 18px;" th:if="${#bools.isTrue(param.error)}">
+                            E-mail e/ou Senha inválido.
+                        </div>
+                        <h2 class="title">Fazer Login</h2>
+                        <div class="input-field">
+                            <i class="fas fa-envelope"></i>
+                            <input type="text" placeholder="E-mail" name="username">
+                        </div>
+                        <div class="input-field">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" placeholder="Password" name="password">
+                        </div>
+                        <input type="submit" value="Login" class="btn solid">
+                        <a href="" class="esqueceu-senha">Esqueceu sua senha?</a>
+                        <div class="social-media">
+                            <a href="#" class="social-icon">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-icon">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="social-icon">
+                                <i class="fab fa-google"></i>
+                            </a>
+                            <a href="#" class="social-icon">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </div>
+                    </form>
+                    <!--BLOCO DE MENSAGENS-->
+                    <th:block th:include="fragmentos/MessagensDeAlertas"></th:block>
+
+                    <form method="POST" th:object="${usuario}" autocomplete="off" th:action="@{/criarContaUsuarios}" class="sign-up-form">
+                        <h2 class="title">Criar Conta</h2>
+                        <div class="input-field">
+                            <i class="fas fa-user"></i>
+                            <input type="text" placeholder="Username" th:field="*{nomeUsuario}">
+                        </div>
+                        <span class="" style="color: #d43f3a;" th:if="${#fields.hasErrors('nomeUsuario')}" 
+                              th:errors="*{nomeUsuario}">
+                        </span>
+                        <div class="input-field">
+                            <i class="fas"></i>
+                            <input type="text" placeholder="B.I" th:field="*{bi}">
+                        </div>
+                        <span class="" style="color: #d43f3a;" th:if="${#fields.hasErrors('bi')}" 
+                              th:errors="*{bi}">
+                        </span>
+                        <div class="input-field">
+                            <i class="fas"></i>
+                            <input type="text" placeholder="Nº de Estudante" th:field="*{numeroEstudante}">                        
+                        </div>
+                        <div class="input-field">
+                            <i class="fas fa-envelope"></i>
+                            <input type="text" placeholder="E-mail" th:field="*{email}">
+                        </div>
+                        <span class="" style="color: #d43f3a;" th:if="${#fields.hasErrors('email')}" 
+                              th:errors="*{email}">
+                        </span>
+                        <div class="input-field">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" placeholder="Senha" th:field="*{senha}">
+                        </div>
+                        <span class="" style="color: #d43f3a;" th:if="${#fields.hasErrors('senha')}" 
+                              th:errors="*{senha}">
+                        </span>
+                        <div class="input-field">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" placeholder="Confirmar Senha" th:field="*{confirmacaoSenha}">
+                        </div>
+                        <span class="" style="color: #d43f3a;" th:if="${#fields.hasErrors('confirmacaoSenha')}" 
+                              th:errors="*{confirmacaoSenha}">
+                        </span>
+                        <input type="submit" value="Criar" class="btn solid">
+                        <a href="" class="esqueceu-senha">Esqueceu sua senha?</a>
+                        <div class="social-media">
+                            <a href="#" class="social-icon">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-icon">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="social-icon">
+                                <i class="fab fa-google"></i>
+                            </a>
+                            <a href="#" class="social-icon">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </div>                       
+                    </form>
+                </div>
+            </div>
+            <div class="panels-container">
+                <div class="panel left-panel">
+                    <div class="content">
+                        <h3>ISPI Payment</h3>
+                        <p>A sua plataforma académica digital que lhe permite controlar melhor os seus pagamentos de transportes bem como seus aproveitamentos académicos e muito mais</p>
+                        <button class="btn transparent" id="sign-up-btn">Criar Conta</button>
+                    </div>
+                    <img src="img/signup.svg" class="image" alt="">
+                </div>
+                <div class="panel right-panel">
+                    <div class="content">
+                        <h3>ISPI Payment</h3>
+                        <p>Se és estudante e não tens uma conta, crie já para poderes controlar os seus pagamentos de transporte e outros sem sair de casa</p>
+                        <button class="btn transparent" id="sign-in-btn">Fazer Login</button>
+                    </div>
+                    <img src="img/signin.svg" class="image" alt="">
+                </div>
+            </div>
+        </div>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/vendors.min.js"></script>
+        <script type="text/javascript" src="js/main.js" th:src="@{js/main.js}"></script>
+        <script th:src="@{js/app.js}"></script>
+    </body>
+
+</html>

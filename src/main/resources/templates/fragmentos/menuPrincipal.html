@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css"/>
+    </head>
+
+    <body>
+        <div th:fragment="menuPrincipal">
+            <input type="checkbox" id="nav-toggle">
+            <div class="sidebar">
+                <div class="sidebar-brand">
+                    <h2><span class="lab la-accusoft"></span><span>ISPI Payment</span></h2>
+                </div>
+                <div class="sidebar-menu">
+                    <ul>
+                        <li>
+                            <a href="/dashboard" class="nav_link active"><img src="/img/home_32px.png" alt="" class="icon">
+                                <span>Dashboard</span></a>
+                        </li>
+                        <li>
+                            <a href="/secretariaPage" class="nav_link"><img src="/img/secretary.png" alt="" class="icon">
+                                <span>Secretaria</span></a>
+                        </li>
+                        <li>
+                            <a href="/servicePage" class="nav_link"><img src="/img/service.png" alt="" class="icon">
+                                <span>Serviços</span></a>
+                        </li>
+                        <li>
+                            <a href="/myPayments" class="nav_link"><img src="/img/online_payment_50px.png" alt="" class="icon">
+                                <span>Meus Pagamentos</span></a>
+                        </li>
+                        <li>
+                            <a href="/transportePage" class="nav_link"><img src="/img/taxi_mobile_payment_64px.png" alt="" class="icon">
+                                <span>Transportes</span></a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="nav_link"><img src="/img/print.png" alt="" class="icon">
+                                <span>Relatórios</span></a>
+                        </li>
+                        <li>
+                            <a href="/cadastroUsuarios" class="nav_link"><img src="/img/user.png" alt="" class="icon">
+                                <span>Usuários</span></a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav_link"><img src="/img/notification.png" alt="" class="icon">
+                                <span>Notificações</span></a>
+                        </li>
+                        <li>
+                            <a href="/other" class="nav_link"><img src="/img/mind_map.png" alt="" class="icon">
+                                <span>Outros</span></a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="main-content">
+                <header>
+                    <h2>
+                        <label for="nav-toggle">
+                            <span class="las la-bars"></span>
+                        </label> Dashboard
+                    </h2>
+                    <div class="search-wrapper">
+                        <span class="las la-search"></span>
+                        <input type="search" placeholder="Search" />
+                    </div>
+                    <div class="user-wrapper">
+                        <img src="/img/pedro.jpg" width="40px" height="40px" alt="">
+                        <div>
+                            <p sec:authentication="principal.usuario.nomeUsuario">Username</p>
+                            <a th:href="@{/logout}"><img src="/img/logout.png" width="25px" height="25px" alt="Logout"></a>
+                        </div>
+                    </div>
+                </header> 
+            </div>
+            <script src="js/dashboard.js"></script>
+        </div>
+
+    </body>
+
+</html>

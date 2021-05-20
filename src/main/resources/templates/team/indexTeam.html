@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Team</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--link rel="stylesheet" type="text/css" href="css/vendors.min.css"/>
+        <link rel="stylesheet" type="text/css" href="css/ispi.min.css"/>
+        <link rel="stylesheet" type="text/css" href="css/application.css"/-->
+        <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    </head>
+    <body>
+
+        <div class="page-header">
+            <div class="container-fluid">
+                <h1>
+                    Grupos de Trabalho
+                </h1>
+            </div>
+        </div>
+        <hr/>
+        <div class="container">
+            <div class="card-group">
+                <div class="card">
+                    <img class="card-img-top" src="image/groupInit.svg" alt="Card image cap" style="width: 20rem; height: 10rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Criar Grupos de Trabalho</h5>
+                        <p class="card-text">Este mecanismo lhe permite criar um grupo de trabalho e adicionar membros a ele.</p>
+                        <button  type="button"  class="btn btn-primary"  data-toggle="modal" data-target="#exampleModal" >Criar Grupos</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top" src="image/group.svg" alt="Card image cap" style="width: 20rem; height: 10rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Juntar-se a Grupos de Trabalho</h5>
+                        <p class="card-text">Este mecanismo lhe permite juntar-se a um grupo de trabalho com a senha específica do grupo pretendido.</p>
+                        <button  type="button"  class="btn btn-primary"  data-toggle="modal" data-target="#exampleModal">Juntar-se a um grupo com senha</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-md" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Grupos</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="card-group">
+                        <div class="card">
+                            <a href=""> <img class="card-img-top" src="image/groupInit.svg" alt="Card image cap" style="width: 10rem; height: 5rem;"></a>
+                            <div class="card-body">
+                                <h5 class="card-title">Administrador</h5>                                       
+                            </div>
+                        </div>
+                        <div class="card">
+                            <img class="card-img-top" src="image/group.svg" alt="Card image cap" style="width: 10rem; height: 5rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">Usuários</h5>
+
+                            </div>
+                        </div>
+                    </div>
+                    <form>
+                        <div class="col-md-6 form-group">
+                            <label>Nome:</label>
+                            <input class="form-control"  value="" name="nome" type="text" placeholder="Digite o nome" required="true"/>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 form-group offset-md-3">
+                                <button type="submit" class="btn btn-primary">Salvar</button>
+                            </div>
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>

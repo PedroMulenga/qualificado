@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Usuarios</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="css/bootstrap-switch.min.css" th:href="@{css/bootstrap-switch.min.css}"/>
+        <link rel="stylesheet" type="text/css" href="css/sweetAlert.min.css"/>
+    </head>
+    <body>
+        <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+        <input type="hidden" name="_csrf_header" th:value="${_csrf.headerName}"/>
+        <div class="container">
+            <h2 style="text-align: center;">Cadastro de Usuários</h2>
+            <!--MESSAGENS-->
+            <div class="alert alert-success alert-dismissible" id="success" th:if="${success != null}" role="alert">
+                <label th:text="${success}"></label>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span  aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="alert alert-danger alert-dismissible" id="error"  th:if="${error != null}" role="alert">
+                <label th:text="${error}"></label>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="alert alert-warning alert-dismissible" th:if="${warning != null}" role="alert">
+                <label th:text="${warning}"></label>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="alert alert-info alert-dismissible" th:if="${info != null}" role="alert">
+                <label th:text="${info}"></label>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST" th:object="${usuario}" autocomplete="off" th:action="@{/cadastroUsuarios}">
+                <div class="container">
+                    <div class="form-row">                   
+                        <div class="form-group col-md-3">                       
+                            <label for="bi">B.I:</label>
+                            <input type="text" id="bi" class="form-control" name="bi" th:field="*{bi}" placeholder="Ex: 999999999XX999"/>
+                            <span class="form-text text-danger" th:if="${#fields.hasErrors('bi')}" 
+                                  th:errors="*{bi}">
+                            </span>
+                        </div>
+                        <div class="form-group col-md-2" style="margin-top: 32px;">                      
+                            <button class="btn btn-outline-info" id="buscarUsuario"  type="button">Pesquisar</button>       
+                        </div>
+
+                    </div>                   
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="nomeUsuario">Nome Usuário:</label>
+                            <input type="text" class="form-control" id="nomeUsuario" th:field="*{nomeUsuario}">
+                            <span class="form-text text-danger" th:if="${#fields.hasErrors('nomeUsuario')}" 
+                                  th:errors="*{nomeUsuario}">
+                            </span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label  for="email">E-mail</label>
+                            <div class="col-auto">                          
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">@</div>
+                                    </div>
+                                    <input type="email" class="form-control" id="email" th:field="*{email}" placeholder="E-mail">                   
+                                </div>
+                                <span class="form-text text-danger" th:if="${#fields.hasErrors('email')}" 
+                                      th:errors="*{email}">
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="senha">Senha:</label>
+                            <input type="password" class="form-control" id="senha" th:field="*{senha}" placeholder="*****">
+                            <span class="form-text text-danger" th:if="${#fields.hasErrors('senha')}" 
+                                  th:errors="*{senha}">
+                            </span>
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="confirmacaoSenha">Confirmar Senha:</label>
+                            <input type="password" class="form-control" id="confirmacaoSenha" th:field="*{confirmacaoSenha}" placeholder="*****">
+                            <span class="form-text text-danger" th:if="${#fields.hasErrors('confirmacaoSenha')}" 
+                                  th:errors="*{confirmacaoSenha}">
+                            </span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="grupo">Grupos</label>
+                            <th:block th:each="grupo : ${grupos}">
+                                <div >
+                                    <input type="checkbox" th:value="${grupo.codigo}" th:field="*{grupos}">
+                                    <label th:text="${grupo.nome}"></label>                     
+                                </div>
+                            </th:block>
+                            <span class="form-text text-danger" th:if="${#fields.hasErrors('grupos')}" 
+                                  th:errors="*{grupos}">
+                            </span>
+
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label>
+                                    Estado
+                                </label>
+                                <input class="js-status" th:field="*{estado}" type="checkbox" data-off-color="danger" data-on-color="success"
+                                       data-on-text="Activo" data-off-text="Inactivo">                                   
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="submit" class="btn btn-outline-success">Salvar</button>
+                        <button type="button"  class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </form>
+            <script src="js/jquery.min.js"></script>
+            <script src="js/bootstrap.bundle.min.js"></script>
+            <script src="js/bootstrap-switch.min.js" th:src="@{js/bootstrap-switch.min.js}" ></script>
+            <script>
+                $('.js-status').bootstrapSwitch();
+            </script>
+            <script src="js/vendors.min.js"></script>
+            <script type="text/javascript" src="js/main.js" th:src="@{js/main.js}"></script>
+        </div>
+    </body>
+</html>

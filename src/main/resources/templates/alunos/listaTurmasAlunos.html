@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+    <head >
+        <title>ISPI Payment</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" th:href="@{https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css}" />
+        <link rel="stylesheet" th:href="@{css/formularios.css}" href="css/formularios.css"/>
+        <link rel="stylesheet" th:href="@{css/dashboard.css}" href="css/dashboard.css" />
+        <link rel="stylesheet" href="css/bootstrap-switch.min.css" th:href="@{css/bootstrap-switch.min.css}"/>
+
+    </head>
+
+    <body>
+        <div th:replace="fragmentos/menuPrincipal :: menuPrincipal"></div> 
+        <div class="container">
+            <div class="title">Lista de Turmas</div>
+            <div class="button-link" sec:authorize-url="/cadastrarTurma">
+                <a href="/cadastrarTurma" >Novo Registo</a>
+            </div>
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Curso</th>
+                        <th>Opções</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="turma : ${listaDeTurmas}">
+                        <td><a th:href="@{/{codigo}(codigo=${turma.codigo})}"><span th:text="${turma.nome}"></span></a></td>
+                        <td th:text="${turma.curso.nome}"></td>
+                        <td>
+                            <a class="btn btn-primary editar" th:href="@{/{codigo}(codigo=${turma.codigo})}">
+                                <i class="fas fa-edit"></i>Listar Estudantes</a>
+                        </td>
+
+                    </tr> 
+                    <tr th:if="${#lists.isEmpty(listaDeTurmas)}">
+                        <td colspan="7">Nenhum valor por apresentar</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div>&nbsp;</div>
+            <div style="display: list-item;">
+                <nav>
+                    <ul>
+                        <li th:class="${first} ? disabled">
+                            <a href="#" th:remove="${first} ? all"><span>&laquo;</span></a>                                 
+                        </li>
+
+                        <th:block th:each="i: ${#numbers.sequence(1, totalDePaginas)}" th:with="numeroPagina=${i - 1}, paginaAtual=${number}">                            
+                            <li th:class="${paginaAtual == numeroPagina} ? active">
+                                <a th:href="|?page=${numeroPagina}|">[[${i}]]</a>
+                            </li>
+                        </th:block>
+
+                        <li>
+                            <a href="#"><span>&laquo;</span></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </body>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head >
+        <title>Usuarios</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    </head>
+    <body>
+
+        <div class="container container-fluid">
+            <br>                    
+            <h3 style="text-align: center; font-family: 'Impact'; font-size: 30px; color: #057D09; text-transform: uppercase;"> BUSCAR USANDO JQUERY</h3> 
+            <br style="margin-top: 20px;">
+
+            <form>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="bi">B.I:</label>
+                        <input type="text" id="bi" class="form-control" name="bi" placeholder="Ex: 0059547HA044"/>
+                    </div>
+                    <div class="form-group col-md-2" style="margin-top: 32px;">
+                        <button class="btn btn-outline-info" id="button"  type="button">Pesquisars</button>
+                    </div>
+
+
+                </div>
+            </form>
+            <div class="form-row">
+                <div class="form-group col-md-4" id="resultadoConsulta" style="margin-top: 32px;">
+                    Retorno do valor da pesquisa
+                    <br>
+                    Nome: <input id="nome" name="nome"/>
+                    Sobrenome: <input id="sobrenome" name="sobrenome"/>
+                    E-mail: <input id="email" name="email"/>
+                    Telefone: <input id="telefone" name="telefone"/>
+                </div>
+            </div>
+
+            <hr>            
+            <script src="js/jquery.min.js"></script>
+            <script src="js/bootstrap.bundle.min.js" ></script>
+            <script type="text/javascript" src="js/main.js" th:src="@{js/texte.js}"></script>
+    </body>
+</html>
