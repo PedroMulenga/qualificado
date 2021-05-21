@@ -6,6 +6,7 @@
 package com.ispi.projectoIspi.Service;
 
 import com.ispi.projectoIspi.Enum.TipoEmolumento;
+import com.ispi.projectoIspi.ExceptionMessages.PagamentoUsuarioExistenteException;
 import com.ispi.projectoIspi.Repository.EmolumentoRepository;
 import com.ispi.projectoIspi.model.Emolumento;
 import com.ispi.projectoIspi.model.Matricula;
@@ -48,7 +49,7 @@ public class EmolumentoService {
 
     public Emolumento findByNumeroEstudanteAndMesReferente(String numeroEstudante) {
         Emolumento emolumento = emolumentoRepository.findByNumeroEstudante(numeroEstudante, anoAcademicoReferente, mesReferente);
-        return emolumento; 
+        return emolumento;
 
     }
 
@@ -63,6 +64,10 @@ public class EmolumentoService {
     }
 
     public void addNew(Emolumento emolumento) {
+        Optional<Emolumento> emolumentoOptional = emolumentoRepository.finByPagamento(emolumento.getMatricula(), emolumento.getTipoEmolumento(), emolumento.getMesReferente(), emolumento.getAnoAcademicoReferente());
+        if (emolumentoOptional.isPresent()) {
+            throw new PagamentoUsuarioExistenteException("O Mês informado já se encontra liquidado para o presente tipo de emolumento");
+        }
         emolumentoRepository.save(emolumento);
     }
 

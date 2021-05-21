@@ -4,10 +4,10 @@
         <title>ISPI Payment</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" th:href="@{https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css}" />
-        <link rel="stylesheet" th:href="@{css/formularios.css}" href="css/formularios.css"/>
-        <link rel="stylesheet" th:href="@{css/dashboard.css}" href="css/dashboard.css" />
-        <link rel="stylesheet" type="text/css" href="css/sweetAlert.min.css"/>
+        <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
+        <link rel="stylesheet"  href="/css/formularios.css"/>
+        <link rel="stylesheet" href="/css/dashboard.css" />
+        <link rel="stylesheet" type="text/css" href="/css/sweetAlert.min.css"/>
 
     </head>
 
@@ -27,6 +27,8 @@
                 <div class="recent-grid">
                     <div class="projects">
                         <div class="card">
+                            <input type="hidden" th:field="*{codigo}">
+                            <input type="hidden" th:field="*{matricula}">
                             <div class="user-details">
                                 <div class="input-box">                       
                                     <span class="details">Número de Estudante</span>

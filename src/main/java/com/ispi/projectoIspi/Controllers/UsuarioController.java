@@ -5,6 +5,7 @@
  */
 package com.ispi.projectoIspi.Controllers;
 
+import com.ispi.projectoIspi.ExceptionMessages.BiUsuarioExistenteException;
 import com.ispi.projectoIspi.ExceptionMessages.EmailUsuarioExistenteException;
 import com.ispi.projectoIspi.ExceptionMessages.SenhaObrigatoriaNovoUsuario;
 import com.ispi.projectoIspi.Repository.GrupoRepository;
@@ -12,7 +13,6 @@ import com.ispi.projectoIspi.Service.FuncionarioService;
 import com.ispi.projectoIspi.Service.UsuarioService;
 import com.ispi.projectoIspi.model.Funcionario;
 import com.ispi.projectoIspi.model.Usuario;
-import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -60,6 +60,9 @@ public class UsuarioController {
             return novoUsuario(usuario);
         } catch (SenhaObrigatoriaNovoUsuario e) {
             result.rejectValue("senha", e.getMessage(), e.getMessage());
+            return novoUsuario(usuario);
+        } catch (BiUsuarioExistenteException e) {
+            result.rejectValue("bi", e.getMessage(), e.getMessage());
             return novoUsuario(usuario);
         }
         attribute.addFlashAttribute("success", "Usuário salvo com sucesso!");

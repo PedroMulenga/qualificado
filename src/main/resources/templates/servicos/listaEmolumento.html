@@ -14,9 +14,9 @@
     <body>
         <div th:replace="fragmentos/menuPrincipal :: menuPrincipal"></div> 
         <div class="container">
-            <div class="title">Lista de Estudantes</div>
-            <div class="button-link" sec:authorize-url="/cadastroAlunos">
-                <a href="/cadastroAlunos" >Novo Registo</a>
+            <div class="title">Lista de Emolumentos</div>
+            <div class="button-link" sec:authorize-url="/pagamentoAluno">
+                <a href="/pagamentoAluno" >Novo Pagamento</a>
             </div>
             <!--MESSAGENS-->
             <th:block th:include="fragmentos/MessagensDeAlertas"></th:block>
@@ -26,20 +26,20 @@
                         <thead>
                             <tr>
                                 <th>Nome</th>
-                                <th>Data de Nascimento</th>
-                                <th>E-mail</th>
+                                <th>Mês Referente</th>
+                                <th>Tipo Emolumento</th>
                                 <th>Situação</th>
                                 <th>Opções</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="aluno : ${listaAlunos}">
-                                <td th:text="${aluno.nome} +' ' + ${aluno.sobrenome}"></td>
-                                <td th:text="${aluno.dataNascimento}"></td>
-                                <td th:text="${aluno.email}"></td>
-                                <td th:text="${aluno.situacao}"></td>
+                            <tr th:each="emolumento : ${listaPagamentosAlunos}">
+                                <td th:text="${emolumento.matricula.aluno.nome} +' ' + ${emolumento.matricula.aluno.sobrenome}"></td>
+                                <td th:text="${emolumento.mesReferente}"></td>
+                                <td th:text="${emolumento.tipoEmolumento}"></td>
+                                <td th:text="${emolumento.situacao}"></td>
                                 <td>
-                                    <a class="click-me" th:href="@{/editarAluno/}+${aluno.codigo}">
+                                    <a class="click-me" th:href="@{/editarPagamentoAluno/}+${emolumento.codigo}">
                                         <i class="fas fa-edit"><img src="/img/edit.png" alt="Edit" width="20px" height="20px"></i>Editar</a>
                                     <label for="click" class="click-me"><img src="/img/delet.png" alt="Delit" width="20px" height="20px">Eliminar</label>
                                 </td>
@@ -53,7 +53,7 @@
                                 <label for="click" class="fas fa-check"></label>
                                 <p class="text">Não Poderás recoperar o dado após a eliminação!</p>
                                 <div class="line"></div>
-                                <a  class="true-btn"  th:href="@{/eliminarAluno/(codigo=${aluno.codigo})}">
+                                <a  class="true-btn"  th:href="@{/eliminarPagamentoAluno/(codigo=${emolumento.codigo})}">
                                     <i class="fas fa-times"></i>Sim, Eliminar</a>
                                 <label for="click" class="close-btn">Não, Cancelar</label>
                             </div>
@@ -61,12 +61,12 @@
                         </div>
 
                         </tr> 
-                        <tr th:if="${#lists.isEmpty(listaAlunos)}">
+                        <tr th:if="${#lists.isEmpty(listaPagamentosAlunos)}">
                             <td colspan="7">Nenhum valor por apresentar</td>
                         </tr>
                         </tbody>
                     </table>
-                    <div class="pagination">
+                    <!--div class="pagination">
                         <div>
                             <span>Total de Registo: [[${totalDeItens}]] - Pagina [[${paginaCorrente}]] de [[${totalDePaginas}]]</span>
                         </div>
@@ -90,7 +90,7 @@
                             <a th:if="${paginaCorrente < totalDePaginas}" th:href="@{'/listarAlunos/' + ${totalDePaginas}}">Last</a>
                             <a th:unless="${paginaCorrente < totalDePaginas}">Last</a>
                         </ul>
-                    </div>
+                    </div-->
 
                 </div>
             </div>           

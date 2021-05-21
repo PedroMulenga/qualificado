@@ -6,6 +6,7 @@
 package com.ispi.projectoIspi.Controllers;
 
 import com.ispi.projectoIspi.Enum.SituacaoMatricula;
+import com.ispi.projectoIspi.ExceptionMessages.PagamentoUsuarioExistenteException;
 import com.ispi.projectoIspi.Service.EmolumentoService;
 import com.ispi.projectoIspi.Service.MatriculaService;
 import com.ispi.projectoIspi.model.Emolumento;
@@ -41,10 +42,8 @@ public class EmolumentoController {
     Matricula matricula;
 
     @GetMapping("/pagamentoAluno")
-    public ModelAndView novoPagamento() {
+    public ModelAndView novoPagamento(Emolumento emolumento) {
         ModelAndView mv = new ModelAndView("servicos/emolumento");
-        mv.addObject("emolumento", new Emolumento());
-        mv.addObject("emolumentos", emolumentoService.getAll());
         return mv;
     }
 
@@ -59,41 +58,53 @@ public class EmolumentoController {
     public ModelAndView salvarPagamento(@Valid @ModelAttribute Emolumento emolumento,
             BindingResult result, RedirectAttributes attribute) {
         if (result.hasErrors()) {
-            ModelAndView mv = new ModelAndView("servicos/emolumento");
-            mv.addObject("matricula", matricula);
-            return mv;
-        } else {
-            emolumento.setMatricula(matricula);
-            emolumentoService.addNew(emolumento);
-            attribute.addFlashAttribute("success", "Pagamento efectuado com sucesso!");
-            return new ModelAndView("redirect:pagamentoAluno");
+            novoPagamento(emolumento);
         }
+        try {
+            emolumento.setMatricula(matricula);
+            if (emolumento.getCodigo() != null) {
+                emolumentoService.update(emolumento);
+                attribute.addFlashAttribute("success", "Registo actualizado com sucesso!");
+            } else {
+                emolumentoService.addNew(emolumento);
+                attribute.addFlashAttribute("success", "Pagamento efectuado com sucesso!");
+            }
+        } catch (PagamentoUsuarioExistenteException e) {
+            result.rejectValue("mesRefente", e.getMessage(), e.getMessage());
+            return novoPagamento(emolumento);
+        }
+
+        return new ModelAndView("redirect:pagamentoAluno");
     }
 
     @GetMapping("/listarPagamentosAlunos")
-    public ModelAndView listarPagamentos(Emolumento emolumento) {
-        ModelAndView mv = new ModelAndView("servicos/emolumento");
+    public ModelAndView listarPagamentos(Emolumento emolumento
+    ) {
+        ModelAndView mv = new ModelAndView("servicos/listaEmolumento");
         mv.addObject("listaPagamentosAlunos", emolumentoService.getAll());
         mv.addObject("listaMatriculaAlunos", matriculaService.getAll());
         return mv;
     }
 
-    @RequestMapping("/getOnePagamentoAluno")
+    /*@RequestMapping("/getOnePagamentoAluno")
     @ResponseBody
-    public Optional<Emolumento> getOne(Long codigo) {
+    public Optional<Emolumento> getOne(Long codigo
+    ) {
         return emolumentoService.getOne(codigo);
-    }
-
-    @RequestMapping(value = "/editarPagamentoAluno", method = {RequestMethod.PUT, RequestMethod.GET})
-    public String editar(Emolumento emolumento, RedirectAttributes attribute) {
-        emolumentoService.update(emolumento);
-        attribute.addFlashAttribute("success", "Pagamento actualizado com sucesso!");
-        return "redirect:/listarPagamentosAlunos";
+    }*/
+    @GetMapping("/editarPagamentoAluno/{codigo}")
+    public ModelAndView editar(@PathVariable("codigo") Long codigo) {
+        ModelAndView mv = new ModelAndView("servicos/emolumento");
+        Optional<Emolumento> emolumentoOptional = emolumentoService.getOne(codigo);
+        mv.addObject("emolumento", emolumentoOptional);
+        mv.addObject("listaMatriculaAlunos", matriculaService.getAll());
+        return mv;
 
     }
 
     @RequestMapping(value = "/eliminarPagamentoAluno", method = {RequestMethod.DELETE, RequestMethod.GET})
-    public String delete(Long codigo, RedirectAttributes attribute) {
+    public String delete(Long codigo, RedirectAttributes attribute
+    ) {
         emolumentoService.delete(codigo);
         attribute.addFlashAttribute("warning", "Registo eliminado com sucesso!");
         return "redirect:/listarPagamentosAlunos";
