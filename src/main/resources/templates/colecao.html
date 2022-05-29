@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+    <head>
+        <meta charset='utf-8'>
+        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+        <title>SHOP</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <link rel='stylesheet' type='text/css' href="/css/login.css">
+        <link rel='stylesheet' href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css">
+    </head>
+    <body>
+        <header class="l-header" id="header">
+            <nav class="nav bd-grid">
+                <div class="nav_toggle" id="nav-toggle">
+                    <i class="bx bxs-grid"></i>
+                </div>
+                <a href="#" class="nav_logo">Repositório</a>
+                <div class="nav_menu" id="nav-menu">
+                    <ul class="nav_list">
+                        <li class="nav_item">
+                            <a href="/listAllMonografias" class="nav_link">Início</a>
+                        </li>
+                        <li class="nav_item">
+                            <a href="/listAllMonografias#featured" class="nav_link">Monografias</a>
+                        </li>
+                        <li class="nav_item">
+                            <a href="/listAllMonografias#women" class="nav_link">Eventos</a>
+                        </li>
+                        <li class="nav_item">
+                            <a href="/listAllMonografias#new" class="nav_link">Postagens</a>
+                        </li>
+                        <li class="nav_item">
+                            <a href="#colecao" class="nav_link active">Colecção</a>
+                        </li>
+                        <li class="nav_item" sec:authorize="hasRole('REGISTAR_TESES')">
+                            <a href="/monografias/listarMonografias" class="nav_link">Dashboard</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="nav_shop">
+                    <a href="/listarPerfil">
+                        <img th:src="@{/mostrarImagemUsuario/{imagem}(imagem=${#authentication.principal.usuario.nomeImagen})}" alt="">
+                    </a>
+                </div>
+            </nav>
+        </header>
+        <main class="l-main">
+            <section class="featured section" id="shop">
+                <h2 class="section-title">Todas os Monografias</h2>
+                <div class="featured_container bd-grid">
+                    <article class="sneaker" th:each="monografia : ${listaDeMonografias}">
+                        <img th:src="@{/mostrarImagemDocumento/{imagem}(imagem=${monografia.nomeImagen})}" alt="" class="sneaker_img">
+                        <span class="sneaker_name" th:text="${monografia.titlo}">Título</span>
+                        <span class="sneaker_preci" th:text="'Autor: '+${monografia.autor}">Autor</span>
+                        <a th:href="@{'/downloadFile/'+${monografia.codigo}}" class="buton-light">Abrir <i class="bx bx-right-arrow-alt button-icon"></i></a>
+                    </article>
+                    <span class="sneaker_preci" th:if="${#lists.isEmpty(listaDeMonografias)}">Nenhum resultado encontrado</span>
+                </div>
+                <div class="sneaker_page bd-grid">
+                    <div>
+                        <a th:if="${paginaCorrente > 1}" th:href="@{'/colecoes/' + ${paginaCorrente - 1}}" class="sneaker_pag">«</a>
+                        <a th:unless="${paginaCorrente > 1}" class="sneaker_pag">«</a>
+                        <th:block th:each="i: ${#numbers.sequence(1, totalDePaginas)}"> 
+                            <a th:if="${i != paginaCorrente}" th:href="@{'/colecoes/' + ${i}}" class="sneaker_pag">[[${i}]]</a>
+                            <span class="sneaker_pag" th:unless="${i != paginaCorrente}">[[${i}]]</span>
+                        </th:block>
+                        <a th:if="${paginaCorrente < totalDePaginas}" th:href="@{'/colecoes/' + ${paginaCorrente + 1}}" class="sneaker_pag">»</a>
+                        <a th:unless="${paginaCorrente < totalDePaginas}" class="sneaker_pag">»</a>
+                    </div>
+                </div>
+
+            </section>
+
+            <footer class="footer section">
+                <div class="footer_container bd-grid">
+                    <div class="footer_box">
+                        <h3 class="footer_tittle">ISPI</h3>
+                        <p class="footer_description">ISPI Lubango 2021</p>
+                    </div>
+                    <div class="footer_box">
+                        <h3 class="footer_tittle">EXPLORAR</h3>
+                        <ul>
+                            <li>
+                                <a href="/listAllMonografias#home" class="footer_link">Início</a>
+                            </li>
+                            <li>
+                                <a href="/listAllMonografias#featured" class="footer_link">Monografia</a>
+                            </li>
+                            <li>
+                                <a href="/listAllMonografias#women" class="footer_link">Eventos</a>
+                            </li>
+                            <li>
+                                <a href="/listAllMonografias#new" class="footer_link">Postagens</a>
+                            </li>
+                        </ul>
+
+                    </div>
+
+                    <div class="footer_box">
+                        <h3 class="footer_tittle">Suportes</h3>
+                        <ul>
+                            <li>
+                                <a href="#" class="footer_link">Suporte ISPI</a>
+                            </li>
+                            <li>
+                                <a href="#" class="footer_link">Secretaria</a>
+                            </li>
+                            <li>
+                                <a href="#" class="footer_link">Serviços Autorizado</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="footer_box">
+                        <a href="#" class="footer_social"><i class="bx bxl-facebook"></i></a>
+                        <a href="#" class="footer_social"><i class="bx bxl-instagram"></i></a>
+                        <a href="#" class="footer_social"><i class="bx bxl-twitter"></i></a>
+                        <a href="#" class="footer_social"><i class="bx bxl-google"></i></a>
+                    </div>
+                </div>
+                <p class="footer_copy">&#169; 2021 ISPI Lubango, Todos os direitos reservados</p>
+            </footer>
+        </main>
+        <script src="js/login.js"></script>
+    </body>
+
+</html>

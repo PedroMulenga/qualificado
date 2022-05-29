@@ -1,10 +1,10 @@
-package com.ispi.projectoIspi;
+package com.qualificador;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ProjectoIspiApplicationTests {
+class IspiRepositorTeseApplicationTests {
 
 	@Test
 	void contextLoads() {

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login</title>
+
+        <link rel="stylesheet" href="./css/style.css" class="rel">
+    </head>
+
+    <body>
+        <div class="add">
+            <div class="conteiner">
+                <div class="main-content">
+                    <div class="m-log">
+                        <div class="m-siz">
+                            <div class="m-siz-a">
+                                <div class="t-label">
+                                    <div class="label">
+                                        <h1><br>QUALIFICADO</h1>
+                                    </div>
+                                    <div class="logo-name">
+                                        <h3>Crie uma conta na sua plataforma, adicione ao seu perfil suas habilidades técnicas profissionais e suas competências e esteja conectado ao mundo de emprego.</h3>
+                                    </div>
+                                    <th:block th:include="fragmentos/MessagensDeAlertas"></th:block>
+                                </div>
+                                <form method="POST" class="i-dt" th:object="${usuario}" th:action="@{/criarContaUsuarios}">
+                                    <section class="inputs">
+                                        <div class="mail">
+                                            <input type="text" placeholder="Nome" th:field="*{nome}">
+                                        </div>
+                                        <span class="" style="color: #d43f3a;" th:if="${#fields.hasErrors('nome')}" 
+                                              th:errors="*{nome}">
+                                        </span>
+                                        <div class="pass">
+                                            <input type="text" placeholder="Sobrenome" th:field="*{sobrenome}">
+                                        </div>
+                                        <span class="" style="color: #d43f3a;" th:if="${#fields.hasErrors('sobrenome')}" 
+                                              th:errors="*{sobrenome}">
+                                        </span>
+                                        <div class="pass">
+                                            <label>Data de Nascimento</label>
+                                            <input type="date" th:field="*{dataNascimento}">
+                                        </div>
+                                        <span class="" style="color: #d43f3a;" th:if="${#fields.hasErrors('dataNascimento')}" 
+                                              th:errors="*{dataNascimento}">
+                                        </span>
+                                        <div class="pass">
+                                            <input type="email" placeholder="E-mail" th:field="*{email}">
+                                        </div>
+                                        <span class="" style="color: #d43f3a;" th:if="${#fields.hasErrors('email')}" 
+                                              th:errors="*{email}">
+                                        </span>
+                                        <div class="pass">
+                                            <input type="text" class="phone" placeholder="Telefone" th:field="*{telefone}">
+                                        </div>
+                                        <span class="" style="color: #d43f3a;" th:if="${#fields.hasErrors('telefone')}" 
+                                              th:errors="*{telefone}">
+                                        </span>
+                                         <div class="pass">
+                                            <input type="text" placeholder="Sua Profissão" th:field="*{profissao}">
+                                        </div>
+                                        <div class="pass">
+                                            <select id="genero" th:field="*{grupos}">
+                                                <option value="">Tipo de usuário</option>
+                                                <option th:each="grupo : ${grupos}" th:if="${grupo.nome!='Administrador'}" 
+                                                        th:value="${grupo.codigo}" th:field="*{grupos}" th:text="${grupo.nome}"></option>
+                                            </select>
+                                            <span class="" style="color: #d43f3a;" th:if="${#fields.hasErrors('grupos')}" 
+                                                  th:errors="*{grupos}">
+                                            </span>
+                                        </div>
+                                        <div class="pass">
+                                            <select id="genero" th:field="*{genero}">
+                                                <option value="">Género</option>
+                                                <option th:each="genero : ${T(com.qualificador.Enum.Genero).values()}"
+                                                        th:value="${genero}" th:text="${genero}"></option>
+                                            </select>
+                                            <span class="" style="color: #d43f3a;" th:if="${#fields.hasErrors('genero')}" 
+                                                  th:errors="*{genero}">
+                                            </span>
+                                        </div>
+                                        <div class="pass">
+                                            <input type="password" placeholder="Palavra passe" th:field="*{senha}">
+                                            <span class="" style="color: #d43f3a;" th:if="${#fields.hasErrors('senha')}" 
+                                                  th:errors="*{senha}">
+                                            </span>
+                                        </div>
+                                        <div class="pass">
+                                            <input type="password" th:field="*{confirmacaoSenha}" placeholder="Confirmar Palavra passe">
+                                            <span class="" style="color: #d43f3a;" th:if="${#fields.hasErrors('confirmacaoSenha')}" 
+                                                  th:errors="*{confirmacaoSenha}">
+                                            </span>
+                                        </div>
+                                    </section>
+                                    <br>
+                                    <input class="in-btn" type="submit" value="Criar Conta">
+                                    <div class="line">
+                                        <p>Já tem uma conta?</p>
+                                    </div>
+                                    <a href="/login" class="cad-btn">Entrar</a>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script th:src="@{/js/jquery.min.js}"></script>
+        <script th:src="@{/js/vendors.min.js}"></script>
+        <script th:src="@{/js/jquery.mask.js}"></script>
+        <script th:src="@{/js/main.js}"></script> 
+    </body>
+
+</html>

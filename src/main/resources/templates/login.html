@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Qualificado</title>
+
+        <link rel="stylesheet" href="/css/style.css" class="rel">
+    </head>
+
+    <body>
+        <div class="add">
+            <div class="conteiner">
+                <div class="main-content">
+                    <div class="m-log">
+                        <div class="m-siz">
+                            <div class="m-siz-a">
+                                <div class="t-label">
+                                    <div class="label">
+                                        <h1><br>QUALIFICADO</h1>
+                                    </div>
+                                    <div class="logo-name">
+                                        <h3>A sua plataforma que lhe permite encontrar docentes totalmente qualificados para o exercício das suas funções</h3>
+                                    </div>
+                                    <a href="/inicio" class="f-ps">Ir ao Menu</a>
+                                    <th:block th:include="fragmentos/MessagensDeAlertas"></th:block>
+                                </div>
+                                <form th:action="@{/login}" method="POST" class="i-dt">
+                                    <div class="error" th:if="${#bools.isTrue(param.error)}">
+                                        <span>E-mail e/ou Senha inválido.</span>
+                                    </div>
+                                    <section class="inputs">
+                                        <div class="mail">
+                                            <input type="text" placeholder="E-mail" name="username">
+                                        </div>
+                                        <div class="pass">
+                                            <input type="Password" placeholder="Palavra passe" name="password">
+                                        </div>
+                                    </section>
+                                    <a class="f-ps" href="/forgotPassword">Esqueceu a sua senha?</a>
+                                    <input class="in-btn" type="submit" value="Entrar">
+                                    <div class="line">
+                                        <p>Não tem uma conta?</p>
+                                    </div>
+                                    <a href="/criarContaUsuarios"  class="cad-btn">Criar conta</a>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+    <head>
+        <meta charset="utf-8">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    </head>
+
+    <body>
+        <div th:fragment="menuPrincipal">
+            <!-- ======= Header ======= -->
+            <header id="header" class="fixed-top">
+                <div class="container d-flex align-items-center">
+
+                    <h1 class="logo mr-auto"><a href="/paginaPrincipal"><span>Quali</span>ficado</a></h1>
+                    <!-- Uncomment below if you prefer to use an image logo -->
+                    <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+                    <nav class="nav-menu d-none d-lg-block">
+                        <ul>
+                            <li class="active"><a href="/paginaPrincipal">Início</a></li>
+
+                            <li class="drop-down"><a href="">Sobre</a>
+                                <ul>
+                                    <li><a href="/paginas/about">Sobre Nós</a></li>
+                                    <li><a href="/paginas/testimonials">Testemunhos</a></li>
+                                </ul>
+                            </li>
+
+                            <li><a href="/recrutamentos/listarUsuarios" sec:authorize="hasRole('ROLE_RECRUTAR')">Quadros</a></li>
+                            <li><a href="/paginas/services">Serviços</a></li>
+                            <li><a href="/contactos/sendEmail" sec:authorize="hasRole('CONTACTAR_ADMIN')">Contactar</a></li>
+                            <li class="drop-down" sec:authorize="hasRole('ROLE_CADASTRAR_USUARIOS')"><a href="">Admin</a>
+                                <ul>
+                                    <li><a href="/usuarios/listarPermissoes">Permissões</a></li>
+                                    <li><a href="/usuarios/listarGrupos">Grupos</a></li>
+                                    <li><a href="/usuarios/listarTodosUsuarios">Usuários</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="/listarPerfil">Meu Perfil</a></li>
+
+                        </ul>
+                    </nav>
+                    <!-- .nav-menu -->
+
+                    <div class="header-social-links">
+                        <a href="#" class="twitter"><i class="icofont-twitter"></i></a>
+                        <a href="#" class="facebook"><i class="icofont-facebook"></i></a>
+                        <a href="#" class="instagram"><i class="icofont-instagram"></i></a>
+                        <a href="/logout" class="linkedin"><i class="icofont-logout"></i></i></a>
+                        <!--label th:text="${#authentication.principal.usuario.nome}"></label-->
+                    </div>
+
+                </div>
+            </header>
+            <!-- End Header --> 
+        </div>
+    </body>
+
+</html>

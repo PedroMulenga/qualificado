@@ -1,10 +1,20 @@
-const sign_in_btn = document.querySelector("#sign-in-btn");
-const sign_up_btn = document.querySelector("#sign-up-btn");
-const container = document.querySelector(".container");
+const sign_up = document.getElementById('sign-up'),
+    sign_in = document.getElementById('sign-in'),
+    login_in = document.getElementById('login-in'),
+    login_up = document.getElementById('login-up')
 
-sign_up_btn.addEventListener('click', () => {
-    container.classList.add("sign-up-mode");
-});
-sign_in_btn.addEventListener('click', () => {
-    container.classList.remove("sign-up-mode");
+sign_up.addEventListener('click', () => {
+    login_in.classList.remove('block')
+    login_up.classList.remove('none')
+
+    login_in.classList.add('none')
+    login_up.classList.add('block')
+})
+
+sign_in.addEventListener('click', () => {
+    login_in.classList.remove('none')
+    login_up.classList.remove('block')
+
+    login_in.classList.add('block')
+    login_up.classList.add('none')
 });

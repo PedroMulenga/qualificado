@@ -1,34 +1,25 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
     <head>
-        <meta charset="UTF-8"/>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
-
-        <title>ISPI Payment</title>
-
-        <link rel="stylesheet" type="text/css" th:href="@{css/vendors.min.css}"/>
-        <link rel="stylesheet" type="text/css" th:href="@{css/ispi.min.css}"/>
-        <link rel="stylesheet" type="text/css" th:href="@{css/application.css}"/>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">        
+        <link rel="stylesheet" href="/css/dashboard.css" />
+        <title>Qualificado</title>
     </head>
 
-    <body class="aw-layout-simple-page">
-        <div class="aw-layout-simple-page__container">
-
-            <div class="aw-error-panel">
-                <h1 class="aw-error-panel__code" style="font-size: 8rem; font-weight: 700;">
-                    <i class="fa  fa-location-arrow" style="font-size: 8rem; font-weight: 700; color: #0782C3;"></i> 404
-                </h1>
-
-                <h2 class="aw-error-panel__title" style="font-size: 4rem; text-transform: uppercase; font-weight: 600;">Página não encontrada</h2>
-
-                <div class="aw-error-panel__description" style="font-size: 2rem;">
-                    Desculpe, a página que você tentou acessar não foi encontrada ou não existe mais.
-                    Verifique se a URL está correta ou entre em contato conosco se precisar de ajuda.
-                    <br/><br/>
-                    <a href="javascript:history.back()" class="btn  btn-primary" style="padding: 2rem; font-size: 1.6rem; border-radius: 40px; border: 0;">Voltar para a página inicial</a>
+    <body>
+        <main>
+            <div class="dashboard-container">
+                <div class="card details">
+                    <div class="details-header">
+                        <h2 style="font-size: 3rem; text-align: center; align-content: center; align-items: center; margin: 10px 5px 3px 10px;">ERRO<span style="font-size: 5rem; font-weight: 700; padding: 10px; color: #8390A2;">404</span></h2>                      
+                    </div> 
+                    <h3>PÁGINA NÃO ENCONTRADA</h3>
                 </div>
             </div>
-        </div>
+        </main>
     </body>
+
 </html>

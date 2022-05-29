@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+    <head>
+        <meta charset="utf-8">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+        <title>Qualificado</title>
+        <meta content="" name="description">
+        <meta content="" name="keywords">
+
+        <!-- Favicons -->
+        <link href="/img/favicon.png" rel="icon">
+        <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+        <!-- Vendor CSS Files -->
+        <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+        <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+        <link href="/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+        <link href="/assets/vendor/venobox/venobox.css" rel="stylesheet">
+        <link href="/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <link href="/assets/vendor/aos/aos.css" rel="stylesheet">
+        <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+
+        <!-- Template Main CSS File -->
+        <link href="/assets/css/style.css" rel="stylesheet">
+
+        <!-- =======================================================
+      * Template Name: Company - v2.2.1
+      * Template URL: https://bootstrapmade.com/company-free-html-bootstrap-template/
+      * Author: BootstrapMade.com
+      * License: https://bootstrapmade.com/license/
+      ======================================================== -->
+    </head>
+
+    <body>
+
+        <div th:replace="fragmentos/menuTelaInicial :: menuInicial"></div> 
+        <!-- ======= Hero Section ======= -->
+        <section id="hero">
+            <div id="heroCarousel" class="carousel slide carousel-fade" data-ride="carousel">
+
+                <div class="carousel-inner" role="listbox">
+
+                    <!-- Slide 1 -->
+                    <div class="carousel-item active" style="background-image: url(/assets/img/slide/slide-1.jpg);">
+                        <div class="carousel-container">
+                            <div class="carousel-content animate__animated animate__fadeInUp">
+                                <h2>QUALI<span>FICADO</span></h2>
+                                <p>Esta plataforma lhe permite escolher profissionais qualificados nas mais diversas áreas. É apresentado um portifólio do candidato em função da área de formação bem como esperièncias profissionais.</p>
+                                <div class="text-center"><a href="/criarContaUsuarios" class="btn-get-started">Saber Mais</a></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2 -->
+                    <div class="carousel-item" style="background-image: url(/assets/img/slide/slide-2.jpg);">
+                        <div class="carousel-container">
+                            <div class="carousel-content animate__animated animate__fadeInUp">
+                                <h2>Rápida & <span>Segura</span></h2>
+                                <p>Esta plataforma oferece rapidéz e segurança para os seus usuários. Leve consigo em todos os lugares.</p>
+                                <div class="text-center"><a href="/criarContaUsuarios" class="btn-get-started">Saber Mais</a></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 3 -->
+                    <div class="carousel-item" style="background-image: url(/assets/img/slide/slide-3.jpg);">
+                        <div class="carousel-container">
+                            <div class="carousel-content animate__animated animate__fadeInUp">
+                                <h2>Fazer Login / Criar Conta</h2>
+                                <p>Faça o seu cadastro na sua plataforma para poderes usufruir dos nossos serviços, caso já tenhas uma conta qualificada faça o seu Login</p>
+                                <div class="text-center"><a href="/login" class="btn-get-started">Fazer Login</a></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <a class="carousel-control-prev" href="#heroCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon icofont-simple-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+
+                <a class="carousel-control-next" href="#heroCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon icofont-simple-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+
+                <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+
+            </div>
+        </section>
+        <!-- End Hero -->
+
+        <main id="main">
+
+            <!-- ======= Our Clients Section ======= -->
+            <section id="clients" class="clients">
+                <div class="container" data-aos="fade-up">
+
+                    <div class="section-title">
+                        <h2>Parceiros</h2>
+                    </div>
+
+                    <div class="row no-gutters clients-wrap clearfix" data-aos="fade-up">
+
+                        <div class="col-lg-3 col-md-4 col-6">
+                            <div class="client-logo">
+                                <img src="/assets/img/clients/client-1.png" class="img-fluid" alt="">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-4 col-6">
+                            <div class="client-logo">
+                                <img src="/assets/img/clients/client-2.png" class="img-fluid" alt="">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-4 col-6">
+                            <div class="client-logo">
+                                <img src="/assets/img/clients/client-3.png" class="img-fluid" alt="">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-4 col-6">
+                            <div class="client-logo">
+                                <img src="/assets/img/clients/client-4.png" class="img-fluid" alt="">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-4 col-6">
+                            <div class="client-logo">
+                                <img src="/assets/img/clients/client-5.png" class="img-fluid" alt="">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-4 col-6">
+                            <div class="client-logo">
+                                <img src="/assets/img/clients/client-6.png" class="img-fluid" alt="">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-4 col-6">
+                            <div class="client-logo">
+                                <img src="/assets/img/clients/client-7.png" class="img-fluid" alt="">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-4 col-6">
+                            <div class="client-logo">
+                                <img src="/assets/img/clients/client-8.png" class="img-fluid" alt="">
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+            <!-- End Our Clients Section -->
+
+        </main>
+        <!-- End #main -->
+        <div th:replace="fragmentos/footer :: footer"></div> 
+
+        <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+        <!-- Vendor JS Files -->
+        <script src="/assets/vendor/jquery/jquery.min.js"></script>
+        <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+        <script src="/assets/vendor/php-email-form/validate.js"></script>
+        <script src="/assets/vendor/jquery-sticky/jquery.sticky.js"></script>
+        <script src="/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+        <script src="/assets/vendor/venobox/venobox.min.js"></script>
+        <script src="/assets/vendor/waypoints/jquery.waypoints.min.js"></script>
+        <script src="/assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+        <script src="/assets/vendor/aos/aos.js"></script>
+
+        <!-- Template Main JS File -->
+        <script src="/assets/js/main.js"></script>
+
+    </body>
+
+</html>
